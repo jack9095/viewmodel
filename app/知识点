@@ -13,35 +13,34 @@
 
   单例的 HolderFragmentManager： https://upload-images.jianshu.io/upload_images/1813550-f455d7387143265a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240
 
-2.ViewModelStore被谁创建，被谁持有？
- 答：被HolderFragment创建和持有！
+2.ViewModelStore 被谁创建，被谁持有？
+ 答：被 HolderFragment 创建和持有！
 
-3.HolderFragment跟我们的Activity或者Fragment有什么关系？
- 答：当我们要给Activity或者Fragment创建ViewModel的时候，系统就会为Activity或者Fragment添加一个HolderFragment，HolderFragment中会创建持有一个ViewModelStore。
+3.HolderFragment 跟我们的 Activity 或者 Fragment 有什么关系？
+ 答：当我们要给 Activity 或者 Fragment 创建 ViewModel 的时候，系统就会为 Activity 或者 Fragment 添加一个 HolderFragment，HolderFragment 中会创建持有一个 ViewModelStore。
 
 4.HolderFragment怎么创建怎么被添加？
   答：new ViewModelProvider(ViewModelStores.of(fragment), factory);
 
 5.一句话总结`ViewModel`的创建？
- 答：.ViewModel创建一句话总结](https://upload-images.jianshu.io/upload_images/1813550-c0dff4d120123993.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-   这句创建总结其实也说明了`ViewModel`的存储。
+ 答：.ViewModel 创建一句话总结：https://upload-images.jianshu.io/upload_images/1813550-c0dff4d120123993.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240
+   这句创建总结其实也说明了 ViewModel 的存储。
    进一步解释：
-   `ViewModel`是存储在当前`Activity / Fragment` 的 `HolderFragment` 中的`ViewModelStore`的HashMap中，我们可以`get`,`put`或者在`Activity / Fragment `销毁的时候`HolderFragment`会跟随销毁，在`HolderFragment`的`onDestroy`方法中调用`mViewModelStore`的`clear`方法。
-   ![9.HolderFragment伴随销毁时调用自己所有ViewModel的onCleared方法](https://upload-images.jianshu.io/upload_images/1813550-db43163bf333b8ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
+   ViewModel 是存储在当前 Activity 或者 Fragment 的 HolderFragment 中的 ViewModelStore 的 HashMap 中，
+   我们可以get, put 或者在 Activity 或者 Fragment 销毁的时候 HolderFragment 会跟随销毁，在 HolderFragment 的 onDestroy 方法中调用 mViewModelStore 的 clear 方法。
+   HolderFragment 伴随销毁时调用自己所有 ViewModel 的 onCleared 方法：https://upload-images.jianshu.io/upload_images/1813550-db43163bf333b8ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240
 
 
 总结：
- 1.ViewModel 以键值对的形式存在Activity或者Fragment的HolderFragment的 
- ViewModelStore的HashMap中。
+ 1.ViewModel 以键值对的形式存在 Activity 或者 Fragment 的 HolderFragment 的 ViewModelStore 的 HashMap 中。
 
- 2.一个Activity或者Fragment可以有很多个ViewModel。
+ 2.一个 Activity 或者 Fragment 可以有很多个 ViewModel。
 
- 3.一个Activity或者Fragment只会有一个HolderFragment。
+ 3.一个 Activity 或者 Fragment 只会有一个 HolderFragment。
 
- 4.Activity或者Fragment的HolderFragment会保存在全局单例的HolderFragmentManager的HashMap中，在Activity或者Fragment销毁的时候会移除HashMap中对应的value。
+ 4.Activity 或者 Fragment 的 HolderFragment 会保存在全局单例的 HolderFragmentManager 的 HashMap 中，在 Activity 或者 Fragment 销毁的时候会移除 HashMap 中对应的 value。
 
- 5.因为ViewModel是以Activity或者Fragment为存在基础，所以ViewModel可以在当前Activity和Fragment中实现数据共享，前提是传入相同的key值。
+ 5.因为 ViewModel 是以 Activity 或者 Fragment 为存在基础，所以 ViewModel 可以在当前 Activity 和 Fragment 中实现数据共享，前提是传入相同的 key 值。
 
 
 

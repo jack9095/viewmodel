@@ -80,9 +80,11 @@ package android.arch.lifecycle;
 public abstract class ViewModel {
     /**
      * This method will be called when this ViewModel is no longer used and will be destroyed.
+     * 当不再使用此 ViewModel 时，将调用此方法并将其销毁。
      * <p>
      * It is useful when ViewModel observes some data and you need to clear this subscription to
      * prevent a leak of this ViewModel.
+     * 当 ViewModel 观察到一些数据，并且您需要清除此订阅以防止此 ViewModel 泄漏时，它非常有用。
      */
     @SuppressWarnings("WeakerAccess")
     protected void onCleared() {
