@@ -93,6 +93,7 @@ public class HolderFragment extends Fragment implements ViewModelStoreOwner {
         return sHolderFragmentManager.holderFragmentFor(fragment);
     }
 
+    // 全局单例
     @SuppressWarnings("WeakerAccess")
     static class HolderFragmentManager {
         private Map<Activity, HolderFragment> mNotCommittedActivityHolders = new HashMap<>();

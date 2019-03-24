@@ -5,9 +5,9 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 
 /**
- * Application context aware {@link ViewModel}.
+ * 感知应用程序的上下文
  * <p>
- * Subclasses must have a constructor which accepts {@link Application} as the only parameter.
+ * 子类必须有一个接受 application 作为唯一参数的构造函数。
  * <p>
  */
 public class AndroidViewModel extends ViewModel {
@@ -19,7 +19,7 @@ public class AndroidViewModel extends ViewModel {
     }
 
     /**
-     * Return the application.
+     * 返回对应的 Application
      */
     @SuppressWarnings("TypeParameterUnusedInFormals")
     @NonNull
