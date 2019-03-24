@@ -17,10 +17,9 @@ public class ViewModelStores {
     }
 
     /**
-     * Returns the {@link ViewModelStore} of the given activity.
-     *
-     * @param activity an activity whose {@code ViewModelStore} is requested
-     * @return a {@code ViewModelStore}
+     * 如果你的 Activity 实现了 ViewModelStoreOwner 接口具备了提供 ViewModelStore 的功能就直接获取返回
+     * 通常我们的 Activity 都不会去实现这个功能
+     * TODO 为 Activity 创建 ViewModelStore
      */
     @NonNull
     @MainThread
@@ -28,14 +27,14 @@ public class ViewModelStores {
         if (activity instanceof ViewModelStoreOwner) {
             return ((ViewModelStoreOwner) activity).getViewModelStore();
         }
+        // 系统为你的 Activity 添加一个具有提供 ViewModelStore 的功能的 holderFragment
         return holderFragmentFor(activity).getViewModelStore();
     }
 
     /**
-     * Returns the {@link ViewModelStore} of the given fragment.
-     *
-     * @param fragment a fragment whose {@code ViewModelStore} is requested
-     * @return a {@code ViewModelStore}
+     * 如果你的 Fragment 实现了 ViewModelStoreOwner 接口具备了提供 ViewModelStore 的功能就直接获取返回
+     * 通常我们的 Fragment 都不会去实现这个功能
+     * TODO 为 Fragment 创建 ViewModelStore
      */
     @NonNull
     @MainThread
@@ -43,6 +42,7 @@ public class ViewModelStores {
         if (fragment instanceof ViewModelStoreOwner) {
             return ((ViewModelStoreOwner) fragment).getViewModelStore();
         }
+        // 系统为你的 Fragment 添加一个具有提供 ViewModelStore 的功能的 holderFragment
         return holderFragmentFor(fragment).getViewModelStore();
     }
 }

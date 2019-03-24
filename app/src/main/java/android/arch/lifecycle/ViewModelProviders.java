@@ -80,6 +80,7 @@ public class ViewModelProviders {
 
         // 利用 HolderFragment 来关联生命周期并使用 HolderFragment 中的 ViewModelStore 的 HashMap 存储 ViewModel
         // AndroidViewModelFactory 创建 ViewModel
+        // 为本次的ViewModel获取创建一个 ViewModelProvider
         return new ViewModelProvider(ViewModelStores.of(fragment), factory);
     }
 
@@ -93,6 +94,7 @@ public class ViewModelProviders {
         if (factory == null) {
             factory = ViewModelProvider.AndroidViewModelFactory.getInstance(application);
         }
+        // HolderFragment 在这一步中会被创建添加到对应的 Activity  或者 Fragment 中
         return new ViewModelProvider(ViewModelStores.of(activity), factory);
     }
 

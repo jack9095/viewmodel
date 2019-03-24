@@ -3,19 +3,21 @@ package android.arch.lifecycle;
 import java.util.HashMap;
 
 /**
- * Class to store {@code ViewModels}.
+ * 用来存储 ViewModel
  * <p>
- * An instance of {@code ViewModelStore} must be retained through configuration changes:
- * if an owner of this {@code ViewModelStore} is destroyed and recreated due to configuration
- * changes, new instance of an owner should still have the same old instance of
- * {@code ViewModelStore}.
+ * 必须通过配置更改保留 ViewModelStore 的实例：
  * <p>
- * If an owner of this {@code ViewModelStore} is destroyed and is not going to be recreated,
- * then it should call {@link #clear()} on this {@code ViewModelStore}, so {@code ViewModels} would
- * be notified that they are no longer used.
+ * 如果此 ViewModelStore 的所有者由于配置而被销毁并重新创建
+ * 更改，所有者的新实例仍应具有相同的旧实例
  * <p>
- * {@link android.arch.lifecycle.ViewModelStores} provides a {@code ViewModelStore} for
- * activities and fragments.
+ * 如果此 ViewModelStore 的所有者被销毁，并且不会被重新创建，
+ * 然后它应该在这个 viewModelStore 上调用 clear（），因此 ViewModels 通知他们不再使用。
+ * 当Activity或者Fragment销毁的时候就会调用clear方法
+ *
+ * TODO 问题点：
+ * 1.ViewModelStore被HolderFragment创建和持有
+ *
+ * TODO ViewModelStore 是每一个 Activity 或者 Fragment 都有一个
  */
 public class ViewModelStore {
 
@@ -33,7 +35,7 @@ public class ViewModelStore {
     }
 
     /**
-     *  Clears internal storage and notifies ViewModels that they are no longer used.
+     * 清除内部存储并通知 ViewModel 它们不再使用
      */
     public final void clear() {
         for (ViewModel vm : mMap.values()) {
